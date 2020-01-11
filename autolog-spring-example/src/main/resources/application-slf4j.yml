@@ -1,0 +1,6 @@
+autolog:
+  loggers:
+    - Slf4jAdapter
+
+logging:
+  config: classpath:logConfigurations/logback.xml

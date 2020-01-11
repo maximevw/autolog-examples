@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.github.maximevw</groupId>
+        <artifactId>autolog-examples</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>autolog-spring-example</artifactId>
+    <packaging>jar</packaging>
+
+    <name>Autolog with Spring Boot example</name>
+    <description>Example of Autolog integration in a Spring Boot application</description>
+
+    <properties>
+        <!-- Standard Spring Boot resource delimiter for resources filtering -->
+        <resource.delimiter>@</resource.delimiter>
+    </properties>
+
+    <dependencies>
+        <!-- ============================================================================== -->
+        <!-- Note:                                                                          -->
+        <!-- Dependencies autolog-spring and spring-boot-starter-web are managed by profile -->
+        <!-- ============================================================================== -->
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+            <exclusions>
+                <!-- Exclude the default Logback implementation to select the wanted one in each profile -->
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <!-- Resource filtering -->
+        <resources>
+            <resource>
+                <filtering>true</filtering>
+                <directory>${project.basedir}/src/main/resources</directory>
+                <includes>
+                    <include>**/application*.yml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>${project.basedir}/src/main/resources</directory>
+                <excludes>
+                    <exclude>**/application*.yml</exclude>
+                </excludes>
+            </resource>
+        </resources>
+
+        <plugins>
+            <!-- Compilation -->
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+
+            <!-- Enforcer -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+            </plugin>
+
+            <!-- Licensing management -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+            </plugin>
+
+            <!-- Spring Boot plugin -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <!-- ============================================================================== -->
+        <!-- Default profile:                                                               -->
+        <!-- Starts on port 8080 only using standard system output for logging              -->
+        <!-- ============================================================================== -->
+        <profile>
+            <id>default</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+
+            <properties>
+                <spring.profile>default</spring.profile>
+                <server.port>8080</server.port>
+            </properties>
+
+            <dependencies>
+                <dependency>
+                    <groupId>com.github.maximevw</groupId>
+                    <artifactId>autolog-spring</artifactId>
+                </dependency>
+
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-web</artifactId>
+                    <exclusions>
+                        <!-- Exclude the default Logback implementation not wanted here -->
+                        <exclusion>
+                            <groupId>org.springframework.boot</groupId>
+                            <artifactId>spring-boot-starter-logging</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+            </dependencies>
+        </profile>
+
+        <!-- ============================================================================== -->
+        <!-- Slf4j profile:                                                                 -->
+        <!-- Starts on port 8081 using Logback implementation of Slf4j for logging          -->
+        <!-- ============================================================================== -->
+        <profile>
+            <id>slf4j</id>
+
+            <properties>
+                <spring.profile>slf4j</spring.profile>
+                <server.port>8081</server.port>
+            </properties>
+
+            <dependencies>
+                <dependency>
+                    <groupId>com.github.maximevw</groupId>
+                    <artifactId>autolog-spring</artifactId>
+                </dependency>
+
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-web</artifactId>
+                </dependency>
+
+                <dependency>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-classic</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
+
+        <!-- ============================================================================== -->
+        <!-- Log4j2 profile:                                                                -->
+        <!-- Starts on port 8082 using Log4j2 for logging                                   -->
+        <!-- ============================================================================== -->
+        <profile>
+            <id>log4j2</id>
+
+            <properties>
+                <spring.profile>log4j2</spring.profile>
+                <server.port>8082</server.port>
+            </properties>
+
+            <dependencies>
+                <dependency>
+                    <groupId>com.github.maximevw</groupId>
+                    <artifactId>autolog-spring</artifactId>
+                </dependency>
+
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-web</artifactId>
+                    <exclusions>
+                        <!-- Exclude the default Logback implementation not wanted here -->
+                        <exclusion>
+                            <groupId>org.springframework.boot</groupId>
+                            <artifactId>spring-boot-starter-logging</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-log4j2</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+</project>

@@ -1,0 +1,12 @@
+server:
+  port: @server.port@
+  servlet:
+    context-path: /example
+
+autolog:
+  loggers:
+    - SystemOutAdapter
+
+spring:
+  profiles:
+    include: @spring.profile@

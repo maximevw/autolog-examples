@@ -1,0 +1,7 @@
+*.iml
+.idea/*
+!.idea/runConfigurations/
+.classpath
+*.jar
+target
+MANIFEST.MF

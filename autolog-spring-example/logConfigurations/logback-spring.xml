@@ -1,0 +1,5 @@
+2020-01-11 19:31:51.709  INFO 29330 --- [http-nio-8081-exec-1] Autolog                                  : Entering method HelloWebController.sayHello(name=Marco)
+2020-01-11 19:31:51.715  INFO 29330 --- [http-nio-8081-exec-1] Autolog                                  : Entering method Slf4jHelloService.sayHello(name=Marco)
+2020-01-11 19:31:51.719  INFO 29330 --- [http-nio-8081-exec-1] c.g.m.a.e.services.Slf4jHelloService     : Going to say hello to Marco...
+2020-01-11 19:31:51.720  INFO 29330 --- [http-nio-8081-exec-1] Autolog                                  : Exiting method Slf4jHelloService.sayHello returning Hello Marco!
+2020-01-11 19:31:51.722  INFO 29330 --- [http-nio-8081-exec-1] Autolog                                  : Exiting method HelloWebController.sayHello returning Hello Marco!

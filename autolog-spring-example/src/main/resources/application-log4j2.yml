@@ -1,0 +1,6 @@
+autolog:
+  loggers:
+    - Log4j2Adapter
+
+logging:
+  config: classpath:logConfigurations/log4j2.properties
