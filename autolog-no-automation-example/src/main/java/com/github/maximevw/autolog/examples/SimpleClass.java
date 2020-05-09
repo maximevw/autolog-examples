@@ -26,7 +26,7 @@ import org.apache.logging.log4j.Logger;
 
 public class SimpleClass {
 
-	private static Logger LOGGER = LogManager.getLogger(SimpleClass.class);
+	private static final Logger LOGGER = LogManager.getLogger(SimpleClass.class);
 
 	public void doLoopAndSum(final int iterations) {
 		NoAutomationLoggerManager.runWithLogs(

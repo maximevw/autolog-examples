@@ -22,23 +22,41 @@ package com.github.maximevw.autolog.examples;
 
 import com.github.maximevw.autolog.core.annotations.AutoLogMethodInOut;
 import com.github.maximevw.autolog.core.annotations.AutoLogPerformance;
+import com.github.maximevw.autolog.examples.models.PaymentCard;
 import com.github.maximevw.autolog.examples.services.HelloService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@AutoLogMethodInOut
-@AutoLogPerformance
+@Controller
+@AutoLogMethodInOut(logDataInContext = true)
+@AutoLogPerformance(logDataInContext = true)
 public class HelloWebController {
 
 	@Autowired
 	private HelloService helloService;
 
 	@GetMapping("/hello")
-	public String sayHello(@RequestParam final String name) {
-		return helloService.sayHello(name);
+	public ResponseEntity<String> sayHello(@RequestParam final String name) {
+		return ResponseEntity.ok(helloService.sayHello(name));
+	}
+
+	@GetMapping("/form")
+	public String displayForm(final Model model) {
+		model.addAttribute("paymentCard", new PaymentCard());
+		return "exampleForm";
+	}
+
+	@AutoLogMethodInOut
+	@PostMapping("/form")
+	public String submitForm(@ModelAttribute PaymentCard paymentCard) {
+		helloService.logCardInfo(paymentCard.getHolderName(), paymentCard.getNumber(), paymentCard.getCvc());
+		return "exampleFormResult";
 	}
 
 }

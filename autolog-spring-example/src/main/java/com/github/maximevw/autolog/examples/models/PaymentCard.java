@@ -1,6 +1,6 @@
 /*-
  * #%L
- * Autolog without automation example
+ * Autolog with Spring Boot example
  * %%
  * Copyright (C) 2019 - 2020 Maxime WIEWIORA
  * %%
@@ -18,22 +18,24 @@
  * #L%
  */
 
-package com.github.maximevw.autolog.examples;
+package com.github.maximevw.autolog.examples.models;
 
-import com.github.maximevw.autolog.core.logger.adapters.Log4j2Adapter;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-public class SimpleApplication {
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+public class PaymentCard {
 
-	private static final Logger LOGGER = LogManager.getLogger(SimpleApplication.class);
-
-	public static void main(String[] args) {
-		LOGGER.debug("Instantiate logger manager for application...");
-		NoAutomationLoggerManager.init(Log4j2Adapter.getInstance());
-
-		// Run the example method.
-		new SimpleClass().doLoopAndSum(20);
-	}
+	private String holderName;
+	private String number;
+	private String expirationDate;
+	private String cvc;
 
 }

@@ -6,7 +6,7 @@
 
     <groupId>com.github.maximevw</groupId>
     <artifactId>autolog-examples</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <packaging>pom</packaging>
 
     <name>Autolog examples</name>
@@ -56,15 +56,17 @@
         <autolog.version>${project.version}</autolog.version>
 
         <aspectj.version>1.9.5</aspectj.version>
-        <jackson-databind.version>2.10.1</jackson-databind.version>
+        <h2.version>1.4.200</h2.version>
+        <jackson-databind.version>2.11.0</jackson-databind.version>
         <license-maven-plugin.version>2.0.0</license-maven-plugin.version>
         <logback.version>1.2.3</logback.version>
-        <lombok.version>1.18.10</lombok.version>
+        <logstash-logback-encoder.version>6.3</logstash-logback-encoder.version>
+        <lombok.version>1.18.12</lombok.version>
         <maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven-enforcer-plugin.version>3.0.0-M2</maven-enforcer-plugin.version>
         <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
-        <spring-boot.version>2.2.2.RELEASE</spring-boot.version>
+        <spring-boot.version>2.2.6.RELEASE</spring-boot.version>
     </properties>
 
     <dependencyManagement>
@@ -106,15 +108,39 @@
             </dependency>
 
             <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-thymeleaf</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
                 <version>${logback.version}</version>
             </dependency>
 
             <dependency>
+                <groupId>net.logstash.logback</groupId>
+                <artifactId>logstash-logback-encoder</artifactId>
+                <version>${logstash-logback-encoder.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-log4j2</artifactId>
                 <version>${spring-boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-jdbc</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${h2.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

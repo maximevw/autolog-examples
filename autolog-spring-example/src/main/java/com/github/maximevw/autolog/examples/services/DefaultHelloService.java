@@ -22,6 +22,7 @@ package com.github.maximevw.autolog.examples.services;
 
 import com.github.maximevw.autolog.core.annotations.AutoLogMethodInOut;
 import com.github.maximevw.autolog.core.annotations.AutoLogPerformance;
+import com.github.maximevw.autolog.core.annotations.Mask;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +35,12 @@ public class DefaultHelloService implements HelloService {
 	public String sayHello(final String name) {
 		System.out.println("Going to say hello to " + name + "...");
 		return "Hello " + name + "!";
+	}
+
+	public void logCardInfo(final String holderName,
+							@Mask(preservedCharacters = "0:6,:4") final String cardNumber,
+							@Mask(fixedLength = 3) final String cvc) {
+		System.out.println("Received payment card information of " + holderName);
 	}
 
 }

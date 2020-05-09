@@ -23,26 +23,23 @@ package com.github.maximevw.autolog.examples.services;
 import com.github.maximevw.autolog.core.annotations.AutoLogMethodInOut;
 import com.github.maximevw.autolog.core.annotations.AutoLogPerformance;
 import com.github.maximevw.autolog.core.annotations.Mask;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 @Service
-@AutoLogMethodInOut(logDataInContext = true)
-@AutoLogPerformance(logDataInContext = true)
-@Slf4j
-@Profile("slf4j")
-public class Slf4jHelloService implements HelloService {
+@AutoLogMethodInOut
+@AutoLogPerformance
+@Profile("jdbc")
+public class JdbcHelloService implements HelloService {
 
 	public String sayHello(final String name) {
-		log.info("Going to say hello to {}...", name);
+		System.out.println("Going to say hello to " + name + "...");
 		return "Hello " + name + "!";
 	}
 
 	public void logCardInfo(final String holderName,
 							@Mask(preservedCharacters = "0:6,:4") final String cardNumber,
 							@Mask(fixedLength = 3) final String cvc) {
-		log.info("Received payment card information of {}", holderName);
+		System.out.println("Received payment card information of " + holderName);
 	}
-
 }

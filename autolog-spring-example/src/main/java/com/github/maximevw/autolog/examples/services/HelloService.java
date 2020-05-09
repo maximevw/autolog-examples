@@ -24,4 +24,6 @@ public interface HelloService {
 
 	String sayHello(String name);
 
+	void logCardInfo(String holderName, String cardNumber, String cvc);
+
 }

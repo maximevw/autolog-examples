@@ -48,7 +48,7 @@ public final class NoAutomationLoggerManager {
 	/**
 	 * Initializes the {@link LoggerManager} and the Autolog configuration used in this example.
 	 *
-	 * @param loggerInterface The implemenation of {@link LoggerInterface} to register in the LoggerManager.
+	 * @param loggerInterface The implementation of {@link LoggerInterface} to register in the LoggerManager.
 	 */
 	public static void init(@NonNull LoggerInterface loggerInterface) {
 		if (loggerManager == null) {
