@@ -9,26 +9,34 @@
         <version>1.2.0</version>
     </parent>
 
-    <artifactId>autolog-no-automation-example</artifactId>
+    <artifactId>autolog-aspectj-example</artifactId>
     <packaging>jar</packaging>
 
-    <name>Autolog without automation example</name>
-    <description>Example of Autolog integration in a classic Java application without logging automation</description>
+    <name>Autolog with AspectJ example</name>
+    <description>
+        Example of Autolog integration in an application using AspectJ weaving for logging automation
+    </description>
 
     <dependencies>
         <dependency>
             <groupId>com.github.maximevw</groupId>
-            <artifactId>autolog-core</artifactId>
+            <artifactId>autolog-aspectj</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
+            <!-- AspectJ weaving -->
+            <plugin>
+                <groupId>com.nickwongdev</groupId>
+                <artifactId>aspectj-maven-plugin</artifactId>
+            </plugin>
+
             <!-- Compilation -->
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>

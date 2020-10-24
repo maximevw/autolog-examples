@@ -36,6 +36,18 @@ To test the usage of `@Mask` annotation, open the following URL in a web browser
 http://localhost:<port>/example/form
 ```
 
+#### autolog-aspectj-example
+
+This example shows how to use Autolog in a classic Java application using AOP based on AspectJ weaving for logging
+automation.
+
+To run this example, execute the following command:
+```
+mvn clean compile exec:java -Dexec.mainClass="com.github.maximevw.autolog.examples.AspectJApplication"
+```
+
+If you are using IntelliJ, use the run configuration `Run AspectJ example`.
+
 #### autolog-no-automation-example
 
 This example shows how to use Autolog without logging automation but using direct calls to public methods provided by
@@ -51,10 +63,10 @@ mvn clean compile exec:java -Dexec.mainClass="com.github.maximevw.autolog.exampl
 
 If you are using IntelliJ, use the run configuration `Run no automation example`.
 
-You can also download the bundled `autolog-core` jar [here](https://github.com/maximevw/autolog/releases/download/v1.1.0/autolog-core-1.1.0-bundle.jar)
+You can also download the bundled `autolog-core` jar [here](https://github.com/maximevw/autolog/releases/download/v1.2.0/autolog-core-1.2.0-bundle.jar)
 , then copy it into the directory where the example classes are compiled and run this command:
 ```
-java -classpath classes:autolog-core-1.1.0-bundle.jar com.github.maximevw.autolog.examples.SimpleApplication
+java -classpath classes:autolog-core-1.2.0-bundle.jar com.github.maximevw.autolog.examples.SimpleApplication
 ```
 
 ## License

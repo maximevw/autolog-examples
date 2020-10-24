@@ -6,7 +6,7 @@
 
     <groupId>com.github.maximevw</groupId>
     <artifactId>autolog-examples</artifactId>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
     <packaging>pom</packaging>
 
     <name>Autolog examples</name>
@@ -41,6 +41,7 @@
     </scm>
 
     <modules>
+        <module>autolog-aspectj-example</module>
         <module>autolog-spring-example</module>
         <module>autolog-no-automation-example</module>
     </modules>
@@ -56,17 +57,18 @@
         <autolog.version>${project.version}</autolog.version>
 
         <aspectj.version>1.9.5</aspectj.version>
+        <aspectj-maven-plugin.version>1.12.6</aspectj-maven-plugin.version>
         <h2.version>1.4.200</h2.version>
-        <jackson-databind.version>2.11.0</jackson-databind.version>
+        <jackson-databind.version>2.11.3</jackson-databind.version>
         <license-maven-plugin.version>2.0.0</license-maven-plugin.version>
         <logback.version>1.2.3</logback.version>
-        <logstash-logback-encoder.version>6.3</logstash-logback-encoder.version>
-        <lombok.version>1.18.12</lombok.version>
+        <logstash-logback-encoder.version>6.4</logstash-logback-encoder.version>
+        <lombok.version>1.18.16</lombok.version>
         <maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven-enforcer-plugin.version>3.0.0-M2</maven-enforcer-plugin.version>
-        <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
-        <spring-boot.version>2.2.6.RELEASE</spring-boot.version>
+        <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version>
+        <spring-boot.version>2.3.4.RELEASE</spring-boot.version>
     </properties>
 
     <dependencyManagement>
@@ -74,6 +76,11 @@
             <dependency>
                 <groupId>com.github.maximevw</groupId>
                 <artifactId>autolog-core</artifactId>
+                <version>${autolog.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.maximevw</groupId>
+                <artifactId>autolog-aspectj</artifactId>
                 <version>${autolog.version}</version>
             </dependency>
             <dependency>
@@ -89,6 +96,11 @@
                 <scope>provided</scope>
             </dependency>
 
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.aspectj</groupId>
                 <artifactId>aspectjweaver</artifactId>
@@ -152,6 +164,32 @@
                 <plugin>
                     <artifactId>maven-clean-plugin</artifactId>
                     <version>${maven-clean-plugin.version}</version>
+                </plugin>
+
+                <!-- AspectJ weaving -->
+                <plugin>
+                    <groupId>com.nickwongdev</groupId>
+                    <artifactId>aspectj-maven-plugin</artifactId>
+                    <version>${aspectj-maven-plugin.version}</version>
+                    <configuration>
+                        <complianceLevel>1.8</complianceLevel>
+                        <showWeaveInfo>false</showWeaveInfo>
+                        <Xlint>ignore</Xlint>
+                        <parameters>true</parameters>
+                        <weaveDependencies>
+                            <weaveDependency>
+                                <groupId>com.github.maximevw</groupId>
+                                <artifactId>autolog-aspectj</artifactId>
+                            </weaveDependency>
+                        </weaveDependencies>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>compile</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
 
                 <!-- Compilation -->
