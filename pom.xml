@@ -58,7 +58,7 @@
 
         <aspectj.version>1.9.5</aspectj.version>
         <aspectj-maven-plugin.version>1.12.6</aspectj-maven-plugin.version>
-        <h2.version>1.4.200</h2.version>
+        <h2.version>2.0.206</h2.version>
         <jackson-databind.version>2.11.3</jackson-databind.version>
         <license-maven-plugin.version>2.0.0</license-maven-plugin.version>
         <logback.version>1.2.3</logback.version>
